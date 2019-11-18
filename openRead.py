@@ -141,7 +141,7 @@ def play(PDF_file, l4ng, transl, n_pag, entry):
 	text_read = txt_file.read()
 
 	print(text_read)
-	print("\n \n"+"Idioma original:"+l4ng+"\n"+"Idioma traduzido:"+transl)
+	print("\n \n"+"Original language:"+l4ng+"\n"+"Translated Language:"+transl)
 
 	# Translate
 	if l4ng == "por" and transl == "eng":
@@ -199,7 +199,7 @@ def play(PDF_file, l4ng, transl, n_pag, entry):
 		text_read = text_read.replace("\\234"," ")
 		text_read = text_read.replace("\\n"," ")
 		text_read = text_read.replace("[translated_text:","")
-		print('\n'+'Texto Traduzido: \n \n'+text_read)
+		print('\n'+'Translated text: \n \n'+text_read)
 
 	# Inicialize text to speech
 	# Instantiates a client
@@ -247,12 +247,12 @@ def play(PDF_file, l4ng, transl, n_pag, entry):
 
 def translEng():
 	transl = "eng"
-	print("Váriavel transl setada para:"+transl)
+	print("Variable transl set to:"+transl)
 	inicio(caminho,transl)
 
 def translPor():
 	transl = "por"
-	print("Váriavel transl setada para:"+transl)
+	print("Variable transl set para:"+transl)
 	inicio(caminho,transl)
 
 #---------- Third window
@@ -260,9 +260,9 @@ def inicio(caminho):
 
 	livro = caminho.replace("/home/dario/openRead/", "")
 
-	print("Idioma de origem: "+origem)
-	print("Idioma de leitura:"+destino)
-	print("Livro escolhido: "+livro.replace("arquivos/", ""))
+	print("Original language: "+origem)
+	print("Reading language:"+destino)
+	print("Chosen book: "+livro.replace("arquivos/", ""))
 
 	pdf = livro
 	l4ng = origem
@@ -278,7 +278,7 @@ def inicio(caminho):
 		if(entry.get() == ""):
 			entry.insert(0,"1")
 		elif(str(entry.get()) == str(n_pag)):
-			print("Valor ultrapassa o Nº máximo de páginas")
+			print("Value exceeds maximum number of pages")
 		elif(int(entry.get()) >=1 and int(entry.get()) < int(n_pag)):
 			new_entry = int(entry.get())
 			new_entry = new_entry+1
@@ -289,7 +289,7 @@ def inicio(caminho):
 		if(entry.get() == ""):
 			entry.insert(0,"1")
 		elif(entry.get() == "1"):
-			print("Nº mínimo de páginas atingido")
+			print("Minimum number of pages reached")
 		elif(int(entry.get()) >1):
 			new_entry = int(entry.get())
 			new_entry = new_entry-1
@@ -298,7 +298,7 @@ def inicio(caminho):
 			entry.insert(0,new_entry)
 
 
-	lb1 = Label(player, text="Selecione a página: (O livro tem: "+str(n_pag)+" páginas)").place(x = 0, y = 5, width=390, height=40)
+	lb1 = Label(player, text="Select the page: (the book have: "+str(n_pag)+" pages)").place(x = 0, y = 5, width=390, height=40)
 	#validate = player.register(validate_input)
 	for i in range(10):
 		#entry = Entry(player, validate="key", validatecommand=(validate, "%P", n_pag))
@@ -347,27 +347,27 @@ def linguagem(caminho):
 
 	janela2 = Tk()
 
-	lb1 = Label(janela2, text="      Selecione a linguagem de origem").grid(row=1,columnspan=5)
+	lb1 = Label(janela2, text="      Select original language").grid(row=1,columnspan=5)
 	lb_espaco = Label(janela2, text="                             ").grid(row=0,column=1)
-	lb2 = Label(janela2, text="      Selecione a linguagem de leitura").grid(row=5,columnspan=5)
+	lb2 = Label(janela2, text="      Select reading language").grid(row=5,columnspan=5)
 	lb_espaco2 = Label(janela2, text="                             ").grid(row=4,column=1)
 
 	ori = tkinter.IntVar()
-	rb1 = Radiobutton(janela2, text="Português", variable=ori, value=0, command=set_ori_por).grid(row=3, column=1)
-	rb2 = Radiobutton(janela2, text="Inglês", variable=ori, value=1, command=set_ori_eng).grid(row=3, column=2)
+	rb1 = Radiobutton(janela2, text="Portuguese", variable=ori, value=0, command=set_ori_por).grid(row=3, column=1)
+	rb2 = Radiobutton(janela2, text="English", variable=ori, value=1, command=set_ori_eng).grid(row=3, column=2)
 
 	des = tkinter.IntVar()
-	rb3 = Radiobutton(janela2, text="Português", variable=des, value=0, command=set_des_por).grid(row=6, column=1)
-	rb4 = Radiobutton(janela2, text="Inglês", variable=des, value=1, command=set_des_eng).grid(row=6, column=2)
+	rb3 = Radiobutton(janela2, text="Portuguese", variable=des, value=0, command=set_des_por).grid(row=6, column=1)
+	rb4 = Radiobutton(janela2, text="English", variable=des, value=1, command=set_des_eng).grid(row=6, column=2)
 
 	lb_espaco3 = Label(janela2, text="                             ").grid(row=7,column=1)
 	translArg = partial(inicio, caminho)
-	bt1 = Button(janela2, text='Confirmar', command=translArg).grid(row=8,column=1, columnspan=5)
+	bt1 = Button(janela2, text='Confirm', command=translArg).grid(row=8,column=1, columnspan=5)
 
 	#LxA+E+T
 	#500x500+150+300
 	janela2.geometry("280x200+510+50")
-	janela2.title('OpenRead - Seletor de linguagens')
+	janela2.title('OpenRead - Language selector')
 	janela2.mainloop()
 
 #---------- First window
@@ -478,7 +478,7 @@ def selectItem(a):
 tree.bind('<ButtonRelease-1>', selectItem)
 
 # Choice pdf window
-lb1 = Label(janela, text="Selecione um arquivo PDF")
+lb1 = Label(janela, text="Select a PDF File")
 lb_espaco = Label(janela, text="                            ")
 lb_espaco2 = Label(janela, text="                            ")
 lb_espaco.grid(row=38,column=0)
@@ -488,6 +488,6 @@ lb1.grid(row=39,column=0, columnspan=5)
 #LxA+E+T
 #500x500+150+300
 janela.geometry("700x420+300+50")
-janela.title('OpenRead - Selecione um arquivo PDF')
+janela.title('OpenRead - Select a PDF File')
 janela.call('wm', 'iconphoto', janela._w, PhotoImage(file='icon.png'))
 janela.mainloop()
